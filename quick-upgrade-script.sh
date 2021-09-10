@@ -5,7 +5,7 @@ red="\033[1;31m"
 clean="\033[0m"
 
 comm=( 'apt-get install -f'
-	'apt-get upgrade'
+	'apt-get update'
 	'apt-get upgrade'
 	'apt-get dist-upgrade'
 	'apt-get autoremove'
