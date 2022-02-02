@@ -4,13 +4,34 @@ green="\033[1;32m"
 red="\033[1;31m"
 clean="\033[0m"
 
-comm=( 'apt-get install -f'
+comm_snap=(
+	'apt-get install -f'
 	'apt-get update'
 	'apt-get upgrade'
 	'apt-get dist-upgrade'
 	'apt-get autoremove'
 	'apt-get autoclean'
-	'snap refresh')
+	'snap refresh'
+)
+
+comm_nosnap=(
+	'apt-get install -f'
+	'apt-get update'
+	'apt-get upgrade'
+	'apt-get dist-upgrade'
+	'apt-get autoremove'
+	'apt-get autoclean'
+)
+
+comm=()
+ 
+if dpkg -s snapd 2> /dev/null;
+then
+	comm=("${comm_snap[@]}");
+else
+	comm=("${comm_nosnap[@]}");
+fi
+
 
 for i in "${comm[@]}"; do
 	printf "\n${green} $i${clean}\n"
